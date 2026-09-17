@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum User_Type {
+  user
+  admin
+}
+
+enum Priority {
+  low
+  medium
+  hard
+}
+
+enum Complexity {
+  easy
+  medium
+  hard
+}
+
+model User {
+  id              String    @id() @default(uuid())
+  google_uid      String    @unique
+  calendar_id     String    @unique
+  access_token    String    @unique
+  refresh_token   String    @unique
+  type            User_Type
+  email_address   String    @unique
+  username        String    @unique
+  hashed_password String
+  occupation      String
+  created_at      DateTime  @default(now())
+  tasks           Task[]
+  events          Event[]
+  messages        Message[]
+}
+
+model Event {
+  id          String   @unique
+  user_id     String
+  title       String
+  description String?
+  start_time  DateTime
+  end_time    DateTime
+  created_at  DateTime
+  userId      User     @relation(fields: [user_id], references: [id])
+  tasks       Task[]
+}
+
+model Task {
+  id          String     @id @default(uuid())
+  user_id     String
+  event_id    String?
+  task_name   String
+  task_detail String?
+  priority    Priority
+  complexity  Complexity
+  start_time  DateTime
+  end_time    DateTime
+  created_at  DateTime   @default(now())
+  eventId     Event?     @relation(fields: [event_id], references: [id])
+  userId      User       @relation(fields: [user_id], references: [id])
+}
+
+model Message {
+  id         String   @id @default(uuid())
+  user_id    String
+  message    String
+  is_user    Boolean
+  message_at DateTime @default(now())
+  userId     User     @relation(fields: [user_id], references: [id])
+}

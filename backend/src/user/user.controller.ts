@@ -10,7 +10,7 @@ export class UserController {
 
     @Throttle({short_timeframe: {limit: 5, ttl: 30000}})
     @Post('v1/google/register')
-    registerUser(@Body(ValidationPipe) userCredentials: RegisterUser) {
-        return "Test"
+    registerUserRegistration(@Body(ValidationPipe) userCredentials: RegisterUser) {
+        return this.userService.registerUserRegistration(userCredentials);
     }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -5,6 +6,7 @@
 import { Injectable } from '@nestjs/common';
 import { RegisterUser } from './dto/RegisterUser.dto.js';
 import { JwtService } from '@nestjs/jwt';
+import { UserCredential } from './dto/UserCredential.dto.js';
 
 @Injectable()
 export class UserService {
@@ -13,5 +15,10 @@ export class UserService {
         const payload = { googleId: userCredentials.googleId, email: userCredentials.email };
         const token = this.jwtService.sign(payload, {expiresIn: '2h'})
         return { token: token };
+    }
+
+    registerUser(userCredentials: UserCredential, tokenId: string){
+        const token = this.jwtService.verify(tokenId);
+        return token;
     }
 }

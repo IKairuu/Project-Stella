@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable prettier/prettier */
 import { Injectable, UnauthorizedException } from '@nestjs/common';
@@ -8,6 +5,7 @@ import { RegisterUser } from './dto/RegisterUser.dto.js';
 import { JwtService } from '@nestjs/jwt';
 import { UserCredential } from './dto/UserCredential.dto.js';
 import { UserRepository } from './user.repository.js';
+import  * as bcrypt from "bcrypt";
 
 @Injectable()
 export class UserService {
@@ -20,12 +18,13 @@ export class UserService {
     }
 
     async registerUser(userCredentials: UserCredential, tokenId: string){
-        const token = this.jwtService.verify(tokenId);
-        if (!token){
+        try {
+            await this.jwtService.verify(tokenId);
+        }
+        catch {
             throw new UnauthorizedException("Invalid Token")
         }
-        const test = await this.userRepository.registerUserCredentials(userCredentials);
-        console.log(test);
-        return test;
+        const credentials = await this.userRepository.registerUserCredentials(userCredentials);
+        return credentials;
     }
 }

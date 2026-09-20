@@ -24,8 +24,8 @@ export class UserService {
         if (!token){
             throw new UnauthorizedException("Invalid Token")
         }
-        const test = await this.userRepository.registerUserCredentials();
+        const test = await this.userRepository.registerUserCredentials(userCredentials);
         console.log(test);
-        return token;
+        return test;
     }
 }

@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable prettier/prettier */
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { RegisterUser } from './dto/RegisterUser.dto.js';
 import { JwtService } from '@nestjs/jwt';
 import { UserCredential } from './dto/UserCredential.dto.js';
 import { UserRepository } from './user.repository.js';
 import  * as bcrypt from "bcrypt";
+import { UserLoginCredential } from './dto/UserLoginCredential.dto.js';
 
 @Injectable()
 export class UserService {
@@ -29,5 +30,19 @@ export class UserService {
         userCredentials.password = hash ;
         const credentials = await this.userRepository.registerUserCredentials(userCredentials);
         return credentials;
+    }
+
+    async loginUser(loginType: string, userLoginCredentials: UserLoginCredential) {
+        if (loginType === 'password')
+            {
+                const password = await this.userRepository.getUserPassword(userLoginCredentials.username);
+                if (!password){
+                    throw new NotFoundException('Username or Email not found')
+                }
+            }
+        else if (loginType === 'google') {
+            console.log("google")
+        }
+        return "TEst"
     }
 }

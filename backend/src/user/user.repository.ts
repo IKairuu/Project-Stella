@@ -31,4 +31,34 @@ export class UserRepository {
         )
         return credentials;
     }
+
+    async getUserPassword(username: string) {
+        const password = await prisma.user.findFirst({
+            where: { 
+                OR: [
+                        { 
+                            username: username 
+                        }, 
+                        { 
+                            email_address: username 
+                        }
+                    ]
+                }, 
+                select: { hashed_password: true }
+        })
+        return password;
+    }
+
+    async getUserCredential(email: string, password: string) {
+        const credentials = await prisma.user.findFirst({
+            where: { email_address: email, hashed_password: password,  },
+            select: { 
+                id: true,
+                username: true,
+                type: true,
+                occupation: true
+             }
+        })
+        return credentials;
+    }
 }

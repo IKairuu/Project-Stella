@@ -32,8 +32,8 @@ export class UserRepository {
         return credentials;
     }
 
-    async getUserPassword(username: string) {
-        const password = await prisma.user.findFirst({
+    async getUserCredentialsPassword(username: string) {
+        const credentials = await prisma.user.findFirst({
             where: { 
                 OR: [
                         { 
@@ -44,21 +44,30 @@ export class UserRepository {
                         }
                     ]
                 }, 
-                select: { hashed_password: true }
+                select: { 
+                    hashed_password: true,
+                    id: true,
+                    username: true,
+                    type: true,
+                    occupation: true
+                 }
         })
-        return password;
+        return credentials;
     }
 
-    async getUserCredential(email: string, password: string) {
+    async getUserCredentialsGoogle(googleUid: string) {
         const credentials = await prisma.user.findFirst({
-            where: { email_address: email, hashed_password: password,  },
-            select: { 
+            where: {  
+                google_uid: googleUid
+            },
+            select: {
                 id: true,
                 username: true,
                 type: true,
                 occupation: true
-             }
+            }
         })
         return credentials;
+
     }
 }

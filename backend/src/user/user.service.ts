@@ -33,16 +33,38 @@ export class UserService {
     }
 
     async loginUser(loginType: string, userLoginCredentials: UserLoginCredential) {
+        let payload = {} ;
         if (loginType === 'password')
             {
-                const password = await this.userRepository.getUserPassword(userLoginCredentials.username);
-                if (!password){
+                const credentials = await this.userRepository.getUserCredentialsPassword(userLoginCredentials.username);
+                if (!credentials){
                     throw new NotFoundException('Username or Email not found')
+                }
+                
+                if (await bcrypt.compare(userLoginCredentials.password, credentials.hashed_password)){
+                    payload = { 
+                        id: credentials.id,
+                        username: credentials.username,
+                        type: credentials.type,
+                        occupation: credentials.occupation
+                     }
+                }
+                else {
+                    throw new UnauthorizedException('Invalid Email/Username or password')
                 }
             }
         else if (loginType === 'google') {
-            console.log("google")
+            const credentials = await this.userRepository.getUserCredentialsGoogle(userLoginCredentials.google_uid);
+            if (!credentials){
+                throw new UnauthorizedException("Google account not signed in")
+            }
+            payload = {
+                id: credentials.id,
+                username: credentials.username,
+                type: credentials.type,
+                occupation: credentials.occupation
+            }
         }
-        return "TEst"
+        return payload;
     }
 }

@@ -24,6 +24,9 @@ export class UserService {
         catch {
             throw new UnauthorizedException("Invalid Token")
         }
+        const saltRounds = 10;
+        const hash = await bcrypt.hash(userCredentials.password, saltRounds);
+        userCredentials.password = hash ;
         const credentials = await this.userRepository.registerUserCredentials(userCredentials);
         return credentials;
     }

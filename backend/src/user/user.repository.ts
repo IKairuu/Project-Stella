@@ -12,9 +12,6 @@ export class UserRepository {
             {
                 data: {
                     google_uid: userCredential.google_uid,
-                    calendar_id: userCredential.calendar_id,
-                    access_token: userCredential.access_token,
-                    refresh_token: userCredential.refresh_token,
                     email_address: userCredential.email,
                     username: userCredential.username,
                     hashed_password: userCredential.password,

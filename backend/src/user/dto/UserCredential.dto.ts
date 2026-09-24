@@ -7,18 +7,6 @@ export class UserCredential {
     @IsNotEmpty({message: 'Invalid Google UID'})
     google_uid!: string
 
-    @IsString()
-    @IsNotEmpty({message: 'Invalid calendar ID'})
-    calendar_id!: string
-
-    @IsString()
-    @IsNotEmpty({message: 'Invalid access token'})
-    access_token!: string
-
-    @IsString()
-    @IsNotEmpty({message: 'Invalid refresh token'})
-    refresh_token!: string
-
     @IsEmail()
     @IsNotEmpty({message: 'There is no email address'})
     email!: string

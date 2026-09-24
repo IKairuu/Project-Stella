@@ -32,9 +32,6 @@ enum Complexity {
 model User {
   id              String    @id() @default(uuid())
   google_uid      String    @unique
-  calendar_id     String    @unique
-  access_token    String    @unique
-  refresh_token   String    @unique
   type            User_Type
   email_address   String    @unique
   username        String    @unique

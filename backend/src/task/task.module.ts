@@ -1,9 +1,14 @@
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
-import { TaskController } from './task.controller';
-import { TaskService } from './task.service';
+import { TaskController } from './task.controller.js';
+import { TaskService } from './task.service.js';
+import { TaskRepository } from './task.repository.js';
+import { JwtModule } from '@nestjs/jwt';
+import { constants } from '../auth/constants.js';
 
 @Module({
+  imports: [JwtModule.register({secret: constants.secret})],
   controllers: [TaskController],
-  providers: [TaskService]
+  providers: [TaskService, TaskRepository]
 })
 export class TaskModule {}

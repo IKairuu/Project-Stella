@@ -7,7 +7,7 @@ import { UserModule } from './user/user.module.js';
 import { AuthModule } from './auth/auth.module.js';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
-import { TaskModule } from './task/task.module';
+import { TaskModule } from './task/task.module.js';
 
 @Module({
   imports: [HttpModule.register({ timeout: 5000, maxRedirects: 5 }), 

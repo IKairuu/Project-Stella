@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/await-thenable */
 /* eslint-disable prettier/prettier */
-import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { RegisterUser } from './dto/RegisterUser.dto.js';
 import { JwtService } from '@nestjs/jwt';
 import { UserCredential } from './dto/UserCredential.dto.js';
@@ -64,6 +66,12 @@ export class UserService {
                 occupation: credentials.occupation
             }
         }
+        else {
+            throw new BadRequestException('Invalid login type')
+        }
+
+        const token = await this.jwtService.sign({user_id: payload["id"], type: payload["type"]}, {expiresIn: '3h'})
+        payload = {...payload, token: token}
         return payload;
     }
 }

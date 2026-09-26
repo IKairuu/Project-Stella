@@ -5,20 +5,16 @@ import { Complexity, Priority } from "../../../generated/prisma/enums.js";
 
 export class CreateTask {
     @IsString()
-    @IsNotEmpty({message: 'User ID not found'})
-    user_id!: String
-
-    @IsString()
     @IsOptional()
-    event_id!: String
+    event_id!: string
 
     @IsString()
     @IsNotEmpty({message: 'Task Name not found'})
-    task_name!: String
+    task_name!: string
 
     @IsString()
     @IsOptional()
-    task_detail!: String
+    task_detail!: string
 
     @IsEnum(Priority, {message:  'Invalid Priority' })
     @IsNotEmpty()
@@ -26,13 +22,13 @@ export class CreateTask {
 
     @IsEnum(Complexity, {message: 'Invalid Complexity'})
     @IsNotEmpty()
-    complexity!: String
+    complexity!: Complexity
 
     @IsDateString()
     @IsNotEmpty({message: 'Start time not found'})
-    start_time!: String
+    start_time!: string
 
     @IsDateString()
     @IsNotEmpty({message: 'End Time not found'})
-    end_time!: String
+    end_time!: string
 }

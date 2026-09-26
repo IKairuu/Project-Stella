@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable prettier/prettier */
 import { IsEmail, IsNotEmpty, IsString, IsStrongPassword } from "class-validator";
 

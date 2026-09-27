@@ -30,7 +30,9 @@ export class UserService {
         const hash = await bcrypt.hash(userCredentials.password, saltRounds);
         userCredentials.password = hash ;
         const credentials = await this.userRepository.registerUserCredentials(userCredentials);
-        return credentials;
+        const token = this.jwtService.sign({user_id: credentials["id"], type: credentials["type"]}, {expiresIn: '10m'})
+        const payload = { credentials: credentials, token: token }
+        return payload;
     }
 
     async loginUser(loginType: string, userLoginCredentials: UserLoginCredential) {

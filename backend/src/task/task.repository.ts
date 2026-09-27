@@ -19,4 +19,23 @@ export class TaskRepository {
             }})
         })
     }
+
+    async getTasks(userId: string) {
+        const tasks = await prisma.task.findMany({
+            where: {
+                user_id: userId
+            },
+            select: {
+                id: true,
+                event_id: true,
+                task_name: true,
+                task_detail: true,
+                priority: true,
+                complexity: true,
+                start_time: true,
+                end_time: true
+            }
+        })
+        return tasks
+    }
 }

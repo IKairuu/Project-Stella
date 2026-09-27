@@ -14,4 +14,11 @@ export class EventService {
         await this.eventRepository.createEvent(authId, createEvent)
         return { message: "Event Successfully Created" }
     }
+
+
+    async getEvents(token: string) {
+        const authId = await this.authService.verifySessionToken(token.replace("Bearer ", ''))
+        const events = await this.eventRepository.getEvents(authId)
+        return events
+    }
 }

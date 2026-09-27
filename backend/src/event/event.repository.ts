@@ -18,4 +18,20 @@ export class EventRepository {
             })
         })
     }
+
+    async getEvents(userId: string) {
+        const events = await prisma.event.findMany({
+            where: {
+                user_id: userId
+            },
+            select: {
+                id: true,
+                title: true,
+                description: true,
+                start_time: true,
+                end_time: true
+            }
+        })
+        return events;
+    }
 }

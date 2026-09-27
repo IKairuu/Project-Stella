@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable prettier/prettier */
 import { Body, Controller, Get, Headers, Post, UseGuards, ValidationPipe } from '@nestjs/common';
 import { TaskService } from './task.service.js';

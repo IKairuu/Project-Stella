@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module.js';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { TaskModule } from './task/task.module.js';
+import { EventModule } from './event/event.module.js';
 
 @Module({
   imports: [HttpModule.register({ timeout: 5000, maxRedirects: 5 }), 
@@ -16,7 +17,7 @@ import { TaskModule } from './task/task.module.js';
     ThrottlerModule.forRoot([
       { name: 'short_timeframe', ttl: 1000, limit: 5 },
       { name: 'long_timeframe', ttl: 30000, limit: 100 },
-    ]), TaskModule,
+    ]), TaskModule, EventModule,
   ],
   controllers: [AppController],
   providers: [AppService, { provide: APP_GUARD, useClass: ThrottlerGuard }],

@@ -50,7 +50,7 @@ model Event {
   description String?
   start_time  DateTime
   end_time    DateTime
-  created_at  DateTime
+  created_at  DateTime @default(now())
   userId      User     @relation(fields: [user_id], references: [id])
   tasks       Task[]
 }
@@ -66,8 +66,8 @@ model Task {
   start_time  DateTime
   end_time    DateTime
   created_at  DateTime   @default(now())
-  eventId     Event?     @relation(fields: [event_id], references: [id])
   userId      User       @relation(fields: [user_id], references: [id])
+  eventId     Event?     @relation(fields: [event_id], references: [id])
 }
 
 model Message {

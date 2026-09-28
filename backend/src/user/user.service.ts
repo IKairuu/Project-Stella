@@ -8,10 +8,11 @@ import { UserCredential } from './dto/UserCredential.dto.js';
 import { UserRepository } from './user.repository.js';
 import  * as bcrypt from "bcrypt";
 import { UserLoginCredential } from './dto/UserLoginCredential.dto.js';
+import { SessionService } from '../session/session.service.js';
 
 @Injectable()
 export class UserService {
-    constructor(private readonly jwtService: JwtService, private userRepository: UserRepository) {}
+    constructor(private readonly jwtService: JwtService, private userRepository: UserRepository, private readonly sessionService: SessionService) {}
 
     registerUserRegistration(userCredentials: RegisterUser) {
         const payload = { googleId: userCredentials.googleId, email: userCredentials.email };
@@ -73,6 +74,7 @@ export class UserService {
         }
 
         const token = await this.jwtService.sign({user_id: payload["id"], type: payload["type"]}, {expiresIn: '3h'})
+        await this.sessionService.signSession(token, payload) // refactor this
         payload = {...payload, token: token}
         return payload;
     }

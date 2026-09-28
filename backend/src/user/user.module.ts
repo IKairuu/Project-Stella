@@ -7,13 +7,15 @@ import { UserService } from './user.service.js';
 import { UserRepository } from './user.repository.js';
 import { JwtModule } from '@nestjs/jwt';
 import { constants } from '../auth/constants.js';
+import { SessionModule } from '../session/session.module.js';
 
 @Module({
   imports: [
     JwtModule.register({
     secret: constants.secret,
     signOptions: { expiresIn: '5m' }
-  })
+  }),
+  SessionModule
   ],  
   controllers: [
     UserController, 

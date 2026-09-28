@@ -5,10 +5,11 @@ import { RegisterUser } from './dto/RegisterUser.dto.js';
 import { Throttle } from '@nestjs/throttler';
 import { UserCredential } from './dto/UserCredential.dto.js';
 import { UserLoginCredential } from './dto/UserLoginCredential.dto.js';
+import { SessionService } from '../session/session.service.js';
 
 @Controller('users')
 export class UserController {
-    constructor(private readonly userService: UserService) {}
+    constructor(private readonly userService: UserService, private readonly sessionService: SessionService) {}
 
     @Throttle({short_timeframe: {limit: 5, ttl: 30000}})
     @Post('v1/google/register')

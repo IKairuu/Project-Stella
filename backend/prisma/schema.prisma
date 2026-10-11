@@ -30,17 +30,18 @@ enum Complexity {
 }
 
 model User {
-  id              String    @id() @default(uuid())
-  google_uid      String    @unique
-  type            User_Type
-  email_address   String    @unique
-  username        String    @unique
-  hashed_password String
-  occupation      String
-  created_at      DateTime  @default(now())
-  tasks           Task[]
-  events          Event[]
-  messages        Message[]
+  id                String             @id() @default(uuid())
+  google_uid        String             @unique
+  type              User_Type
+  email_address     String             @unique
+  username          String             @unique
+  hashed_password   String
+  occupation        String
+  created_at        DateTime           @default(now())
+  tasks             Task[]
+  events            Event[]
+  messages          AnalyzerMessage[]
+  generatorMessages GeneratorMessage[]
 }
 
 model Event {
@@ -70,7 +71,16 @@ model Task {
   eventId     Event?     @relation(fields: [event_id], references: [id])
 }
 
-model Message {
+model AnalyzerMessage {
+  id         String   @id @default(uuid())
+  user_id    String
+  message    String
+  is_user    Boolean
+  message_at DateTime @default(now())
+  userId     User     @relation(fields: [user_id], references: [id])
+}
+
+model GeneratorMessage {
   id         String   @id @default(uuid())
   user_id    String
   message    String

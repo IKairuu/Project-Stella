@@ -10,6 +10,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { TaskModule } from './task/task.module.js';
 import { EventModule } from './event/event.module.js';
 import { SessionModule } from './session/session.module.js';
+import { CompanionGateway } from './companion/companion.gateway';
 
 @Module({
   imports: [HttpModule.register({ timeout: 5000, maxRedirects: 5 }), 
@@ -21,6 +22,6 @@ import { SessionModule } from './session/session.module.js';
     ]), TaskModule, EventModule, SessionModule,
   ],
   controllers: [AppController],
-  providers: [AppService, { provide: APP_GUARD, useClass: ThrottlerGuard }],
+  providers: [AppService, { provide: APP_GUARD, useClass: ThrottlerGuard }, CompanionGateway],
 })
 export class AppModule {}

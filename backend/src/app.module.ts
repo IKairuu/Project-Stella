@@ -10,7 +10,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { TaskModule } from './task/task.module.js';
 import { EventModule } from './event/event.module.js';
 import { SessionModule } from './session/session.module.js';
-import { CompanionGateway } from './companion/companion.gateway';
+import { CompanionGateway } from './companion/companion.gateway.js';
 
 @Module({
   imports: [HttpModule.register({ timeout: 5000, maxRedirects: 5 }), 

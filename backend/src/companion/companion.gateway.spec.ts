@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CompanionGateway } from './companion.gateway';
+import { CompanionGateway } from './companion.gateway.js';
 
 describe('CompanionGateway', () => {
   let gateway: CompanionGateway;

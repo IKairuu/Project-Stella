@@ -11,6 +11,8 @@ import { TaskModule } from './task/task.module.js';
 import { EventModule } from './event/event.module.js';
 import { SessionModule } from './session/session.module.js';
 import { CompanionGateway } from './companion/companion.gateway.js';
+import { CompanionService } from './companion/companion.service.js';
+import { Service } from './companion/service/service.js';
 
 @Module({
   imports: [HttpModule.register({ timeout: 5000, maxRedirects: 5 }), 
@@ -19,9 +21,9 @@ import { CompanionGateway } from './companion/companion.gateway.js';
     ThrottlerModule.forRoot([
       { name: 'short_timeframe', ttl: 1000, limit: 5 },
       { name: 'long_timeframe', ttl: 30000, limit: 100 },
-    ]), TaskModule, EventModule, SessionModule,
+    ]), TaskModule, EventModule, SessionModule
   ],
   controllers: [AppController],
-  providers: [AppService, { provide: APP_GUARD, useClass: ThrottlerGuard }, CompanionGateway],
+  providers: [AppService, { provide: APP_GUARD, useClass: ThrottlerGuard }, CompanionGateway, CompanionService, Service],
 })
 export class AppModule {}

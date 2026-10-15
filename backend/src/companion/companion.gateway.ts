@@ -11,12 +11,13 @@ export class CompanionGateway {
   constructor(private readonly companionService: CompanionService) {}
   @SubscribeMessage('analyze')
   async handleAnalyzer(client: any, payload: any){
-    const response = await this.companionService.handleAnalyzer(payload)
+    const response = await this.companionService.handleMessage(payload)
     client.emit('analyze', response) 
   }
 
   @SubscribeMessage('generate')
-  handleGenerator(client: any, payload: any) {
-    client.emit('generate', 'Generator') 
+  async handleGenerator(client: any, payload: any) {
+    const response = await this.companionService.handleMessage(payload)
+    client.emit('generate', response)
   }
 }

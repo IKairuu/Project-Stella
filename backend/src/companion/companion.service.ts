@@ -10,7 +10,7 @@ import { Service } from './service/service.js'
 @Injectable()
 export class CompanionService {
     constructor(private readonly service: Service) {}
-    async handleAnalyzer(payload: Message) {
+    async handleMessage(payload: Message) {
         return await this.service.postMessage(payload); 
     }
 }

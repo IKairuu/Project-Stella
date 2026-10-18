@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable prettier/prettier */
 import { Message } from "../dto/message.dto.js";
+import { Summary } from "../dto/summary.dto.js";
 
 /* eslint-disable prettier/prettier */
 export class Service {
@@ -10,6 +11,16 @@ export class Service {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message: body.message })
+            }
+        )
+        return await res.json(); 
+    }
+
+    async getSummary(body: Summary) {
+        const res = await fetch(`http://localhost:5678/webhook/74955b36-7ac2-45a0-bfe5-1a546b9e023f/74955b36-7ac2-45a0-bfe5-1a546b9e023f/${body.id}`, 
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
             }
         )
         return await res.json(); 

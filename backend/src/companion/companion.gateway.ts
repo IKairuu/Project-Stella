@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/await-thenable */
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -19,5 +18,11 @@ export class CompanionGateway {
   async handleGenerator(client: any, payload: any) {
     const response = await this.companionService.handleMessage(payload)
     client.emit('generate', response)
+  }
+
+  @SubscribeMessage('summary')
+  async handleSummary(client: any, payload:any) {
+    const response = await this.companionService.handleSummary(payload)
+    client.emit('summary', response)
   }
 }

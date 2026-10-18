@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/require-await */
-/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable prettier/prettier */
-import { CreateTask } from "./dto/CreateTask.dto.js";
+import { CreateTasks } from "./dto/CreateTasks.js";
 import { prisma } from "../prisma.js";
+import { EditTasks } from "./dto/EditTasks.js";
 
 export class TaskRepository {
-    async createTask(createTask: CreateTask, userId: string) {
+    async createTask(createTask: CreateTasks, userId: string) {
         await prisma.$transaction(async (tx) => {
             await tx.task.create({data: {
             user_id: userId,
@@ -37,5 +36,21 @@ export class TaskRepository {
             }
         })
         return tasks
+    }
+
+    async editTasks(taskData: EditTasks, userId: string) {
+        await prisma.$transaction(async (tx) => {
+            await tx.task.update({
+                where: { id: taskData.id, user_id: userId },
+                data: {
+                    task_name: taskData.task_name,
+                    task_detail: taskData.task_detail,
+                    priority: taskData.priority,
+                    complexity: taskData.complexity,
+                    start_time: taskData.start_time,
+                    end_time: taskData.end_time
+                }
+            })
+        })
     }
 }

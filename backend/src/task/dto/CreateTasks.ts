@@ -3,7 +3,7 @@
 import { IsDateString, IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator";
 import { Complexity, Priority } from "../../../generated/prisma/enums.js";
 
-export class CreateTask {
+export class CreateTasks {
     @IsString()
     @IsOptional()
     event_id!: string

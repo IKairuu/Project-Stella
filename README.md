@@ -9,7 +9,7 @@ A calendar companion that keeps a student's events and tasks in one place, then 
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Frontend-Flutter%20(planned)-02569B?logo=flutter&logoColor=white" alt="Frontend: Flutter (planned)" />
+  <img src="https://img.shields.io/badge/Frontend-SwiftUI-F05138?logo=swift&logoColor=white" alt="Frontend: SwiftUI" />
   <img src="https://img.shields.io/badge/Backend-NestJS-E0234E?logo=nestjs&logoColor=white" alt="Backend: NestJS" />
   <img src="https://img.shields.io/badge/Database-Supabase%20%C2%B7%20Prisma-3ECF8E?logo=supabase&logoColor=white" alt="Database: Supabase and Prisma" />
   <img src="https://img.shields.io/badge/AI-n8n%20agents-EA4B71?logo=n8n&logoColor=white" alt="AI: n8n agents" />
@@ -20,7 +20,7 @@ A calendar companion that keeps a student's events and tasks in one place, then 
 ## Architecture
 
 ```
-Flutter app (planned)
+iOS app (Swift, SwiftUI)
    │  REST (JWT)            WebSocket (socket.io)
    ▼                        ▼
 NestJS backend ─────────────────────► n8n agents (Analyzer, Task Generator)
@@ -31,7 +31,7 @@ NestJS backend ─────────────────────�
 
 | Layer | Tech |
 | --- | --- |
-| Frontend | Flutter (planned) |
+| Frontend | iOS app in Swift and SwiftUI ([IOS-Final-Project](https://github.com/IKairuu/IOS-Final-Project)) |
 | Backend | NestJS 11, TypeScript |
 | Database | PostgreSQL on Supabase, Prisma 7 |
 | Sessions | Redis |
@@ -111,9 +111,11 @@ The backend forwards the message to the n8n webhook for that user and agent and 
 - **Task**: name, detail, priority, complexity, start and end time, optional event
 - **AnalyzerMessage / GeneratorMessage**: chat history for each agent
 
-## Frontend (planned)
+## Frontend
 
-The client will be built in Flutter and will talk to this backend through the REST routes above and a socket.io client for the companion chat. It will cover sign in, the calendar, the dashboard, add and edit pages for tasks and events, and the Analyzer and Task Generator chats.
+The current client is an iOS app built with Swift and SwiftUI, in [IKairuu/IOS-Final-Project](https://github.com/IKairuu/IOS-Final-Project). It talks to this backend through the REST routes above and a WebSocket connection for the companion chat, and covers sign in, the calendar, the dashboard, add and edit pages for tasks and events, and the Analyzer and Task Generator chats.
+
+A Flutter client is planned for later.
 
 ## License
 

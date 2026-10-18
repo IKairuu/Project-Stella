@@ -9,13 +9,15 @@ import { UserRepository } from './user.repository.js';
 import  * as bcrypt from "bcrypt";
 import { UserLoginCredential } from './dto/UserLoginCredential.dto.js';
 import { SessionService } from '../session/session.service.js';
+import { AuthService } from '../auth/auth.service.js';
 
 @Injectable()
 export class UserService {
-    constructor(private readonly jwtService: JwtService, private userRepository: UserRepository, private readonly sessionService: SessionService) {}
+    constructor(private readonly jwtService: JwtService, private userRepository: UserRepository, private readonly sessionService: SessionService, private readonly authService: AuthService) {}
 
-    registerUserRegistration(userCredentials: RegisterUser) {
-        const payload = { googleId: userCredentials.googleId, email: userCredentials.email };
+    async registerUserRegistration(userCredentials: RegisterUser) {
+        const googleUid = await this.authService.verifyIdToken(userCredentials.id_token);
+        const payload = { googleId: googleUid, email: userCredentials.email };
         const token = this.jwtService.sign(payload, {expiresIn: '10m'})
         return { token: token };
     }
@@ -58,7 +60,8 @@ export class UserService {
                 }
             }
         else if (loginType === 'google') {
-            const credentials = await this.userRepository.getUserCredentialsGoogle(userLoginCredentials.google_uid);
+            const googleUid = await this.authService.verifyIdToken(userLoginCredentials.id_token);
+            const credentials = await this.userRepository.getUserCredentialsGoogle(googleUid);
             if (!credentials){
                 throw new UnauthorizedException("Google account not signed in")
             }

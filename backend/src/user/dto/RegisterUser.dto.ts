@@ -6,6 +6,10 @@ export class RegisterUser {
     @IsNotEmpty({message: 'Invalid google ID'})
     googleId!: string
 
+    @IsString()
+    @IsNotEmpty({message: 'ID Token is not found'})
+    id_token!: string
+
     @IsEmail()
     @IsNotEmpty({message: "Invalid email format"})
     email!: string

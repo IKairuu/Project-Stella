@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { UserController } from './user.controller.js';
@@ -8,6 +6,7 @@ import { UserRepository } from './user.repository.js';
 import { JwtModule } from '@nestjs/jwt';
 import { constants } from '../auth/constants.js';
 import { SessionModule } from '../session/session.module.js';
+import { AuthService } from '../auth/auth.service.js';
 
 @Module({
   imports: [
@@ -20,6 +19,6 @@ import { SessionModule } from '../session/session.module.js';
   controllers: [
     UserController, 
   ],
-  providers: [UserService, UserRepository]
+  providers: [UserService, UserRepository,AuthService]
 })
 export class UserModule {}

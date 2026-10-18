@@ -12,5 +12,5 @@ export class UserLoginCredential {
 
     @IsString()
     @IsOptional()
-    google_uid!: string
+    id_token!: string
 }

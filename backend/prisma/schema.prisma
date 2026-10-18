@@ -20,7 +20,7 @@ enum User_Type {
 enum Priority {
   low
   medium
-  hard
+  high
 }
 
 enum Complexity {

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-wrapper-object-types */
 /* eslint-disable prettier/prettier */
 import { IsDateString, IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator";
 import { Complexity, Priority } from "../../../generated/prisma/enums.js";

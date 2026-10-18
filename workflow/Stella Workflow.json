@@ -1,0 +1,1472 @@
+{
+  "name": "Stella Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "6d22346a-ed16-4628-b6c2-031f66718326/:id/:agent",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        -352,
+        752
+      ],
+      "id": "8a57c9d2-31eb-4346-b768-11e42b785967",
+      "name": "POST Stella Analyzer1",
+      "webhookId": "6d22346a-ed16-4628-b6c2-031f66718326"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        656,
+        752
+      ],
+      "id": "633635ac-bc83-4dba-b7f4-58ee717c14f9",
+      "name": "Merge4",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "agentId": {
+          "__rl": true,
+          "value": "F8Y4yFoTJbFnSAw3",
+          "mode": "list",
+          "cachedResultName": "Stella AI Analyzer"
+        },
+        "message": "=User Message: {{ $('Configuration').item.json.message }}\n\nEvents: {{ JSON.stringify($('Event Compiler').first().json.events) }}\n\nTasks: {{ JSON.stringify($('Task Compiler').first().json.tasks) }}\n\nMemory: { {{ JSON.stringify($input.first().json.memory) }} }",
+        "advanced": {}
+      },
+      "type": "n8n-nodes-base.messageAnAgent",
+      "typeVersion": 3.1,
+      "position": [
+        1728,
+        400
+      ],
+      "id": "be2fcaf1-f857-4ed9-882d-2db6d6ea0eeb",
+      "name": "Message an Agent2"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"message\": {{ JSON.stringify($('Message an Agent2').item.json.text) }}\n}\n ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        2928,
+        448
+      ],
+      "id": "33fd6450-b9ed-45a2-b2ff-69c55d0e25c1",
+      "name": "Respond to Webhook2"
+    },
+    {
+      "parameters": {
+        "mode": "chooseBranch"
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        2624,
+        448
+      ],
+      "id": "529a90e3-2ab7-42f7-b1a9-fac8bcbfd482",
+      "name": "Merge5"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nconst id = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {\n  const r = Math.random() * 16 | 0;\n  return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);\n});\nreturn [{ json: { id } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2176,
+        320
+      ],
+      "id": "9fc26283-dfae-4b77-98fd-6eddcc08d9f5",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nconst id = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {\n  const r = Math.random() * 16 | 0;\n  return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);\n});\nreturn [{ json: { id } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2176,
+        528
+      ],
+      "id": "290b82cd-4d34-4e4f-8084-7f6639fd18c8",
+      "name": "Code in JavaScript4"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"message\": {{ JSON.stringify($('Set Message and Tasks').item.json.message) }},\n  \"tasks\": {{ JSON.stringify($('Set Message and Tasks').item.json.tasks) }}\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        3360,
+        848
+      ],
+      "id": "5be6ffe2-824c-4d75-af0c-bf57521a91d2",
+      "name": "Respond to Webhook3"
+    },
+    {
+      "parameters": {
+        "mode": "chooseBranch"
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        3104,
+        848
+      ],
+      "id": "9562f2bb-8a5a-464f-a4f5-d156cfe6b033",
+      "name": "Merge6"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nconst id = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {\n  const r = Math.random() * 16 | 0;\n  return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);\n});\nreturn [{ json: { id } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2656,
+        720
+      ],
+      "id": "9fffc862-63bd-457d-adc0-9f3b6c5f3fb0",
+      "name": "Generate User Message ID1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nconst id = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {\n  const r = Math.random() * 16 | 0;\n  return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);\n});\nreturn [{ json: { id } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2656,
+        928
+      ],
+      "id": "df552ed4-dd15-45cb-97c9-699b2a1a8cc0",
+      "name": "Generate Agent Message ID1"
+    },
+    {
+      "parameters": {
+        "agentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "E79Hfb5or58aMIKN",
+          "cachedResultName": "Stella Task Generator"
+        },
+        "message": "={{ $('Configuration').item.json.message }}\n\nEvents: {{ JSON.stringify($('Event Compiler').first().json.events) }}\n\nTasks: {{ JSON.stringify($('Task Compiler').first().json.tasks) }}\n\nMemory: { {{ JSON.stringify($input.first().json.memory) }} }",
+        "useStructuredOutput": true,
+        "schemaType": "manual",
+        "outputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"tasks\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"event_id\":    { \"type\": \"string\" },\n          \"task_name\":   { \"type\": \"string\" },\n          \"task_detail\": { \"type\": \"string\" },\n          \"priority\":    { \"type\": \"string\", \"enum\": [\"low\", \"medium\", \"high\"] },\n          \"complexity\":  { \"type\": \"string\", \"enum\": [\"easy\", \"medium\", \"hard\"] },\n          \"start_time\":  { \"type\": \"string\", \"format\": \"date-time\" },\n          \"end_time\":    { \"type\": \"string\", \"format\": \"date-time\" }\n        },\n        \"required\": [\"event_id\", \"task_name\", \"task_detail\", \"priority\", \"complexity\", \"start_time\", \"end_time\"]\n      }\n    },\n    \"message\": { \"type\": \"string\" }\n  },\n  \"required\": [\"tasks\", \"message\"]\n}",
+        "advanced": {}
+      },
+      "type": "n8n-nodes-base.messageAnAgent",
+      "typeVersion": 3.1,
+      "position": [
+        1744,
+        816
+      ],
+      "id": "d33164e3-6070-49fb-87cc-ea0b6954a45b",
+      "name": "Message an Agent3",
+      "retryOnFail": true,
+      "waitBetweenTries": 1000,
+      "maxTries": 2,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "Event",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "user_id",
+              "condition": "eq",
+              "keyValue": "={{ $json.user_id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        64,
+        656
+      ],
+      "id": "b61e54b3-cc63-46de-9f29-2ef1c4ed464e",
+      "name": "Get Events",
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "WBfQh0FlJT79RsNi",
+          "name": "Supabase account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "Task",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "user_id",
+              "condition": "eq",
+              "keyValue": "={{ $json.user_id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        64,
+        848
+      ],
+      "id": "e1ec186d-799d-4fb5-896a-ae3c8b41b700",
+      "name": "Get Tasks",
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "WBfQh0FlJT79RsNi",
+          "name": "Supabase account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "62e6fa25-703c-4244-ae0b-4a6ee812534e",
+              "leftValue": "={{ $now }}",
+              "rightValue": "={{ $json.start_time }}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "beforeOrEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        256,
+        656
+      ],
+      "id": "0ea846c7-72bc-4c49-835a-f02e507d4ad0",
+      "name": "Filter Outdated Events",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "a7c2c846-778d-48bb-b5ad-84254c9c59e3",
+              "leftValue": "={{ $now }}",
+              "rightValue": "={{ $json.start_time }}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "beforeOrEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        256,
+        848
+      ],
+      "id": "d7174592-8bd6-4a5f-b8b8-8e8d4b2a8159",
+      "name": "Filter Outdated Tasks",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "let tasks = { \"tasks\": [] }\nfor (const item of $input.all()) {\n  tasks[\"tasks\"].push(item.json)\n}\n\nreturn tasks;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        432,
+        848
+      ],
+      "id": "b0cdf3f6-94de-43a1-b0f8-8fdbc213a6aa",
+      "name": "Task Compiler",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "let events = { \"events\": [] }\nfor (const item of $input.all()) {\n  events[\"events\"].push(item.json)\n}\n\nreturn events;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        432,
+        656
+      ],
+      "id": "69129d73-f03a-49df-b903-f24fbbd84fe8",
+      "name": "Event Compiler",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "AnalyzerMessage",
+        "limit": 20,
+        "orderBy": "message_at.desc",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "user_id",
+              "condition": "eq",
+              "keyValue": "={{ $('Configuration').item.json.user_id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1360,
+        448
+      ],
+      "id": "bb3ddb15-ca2d-4ce2-a567-e291397e0083",
+      "name": "Retrieve Message History",
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "WBfQh0FlJT79RsNi",
+          "name": "Supabase account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nlet memory = { \"memory\": [] }\n\nfor (const item of $input.all()) {\n  memory[\"memory\"].push({ \"message\": item.json.message, \"is_user\": item.json.is_user })\n}\n\nreturn memory ;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1520,
+        448
+      ],
+      "id": "7d7cad3b-a500-45d7-bedd-19455c2a28d5",
+      "name": "Memory Compiler",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3d43fa3a-c305-4765-87c6-76b122e32a0b",
+              "name": "user_id",
+              "value": "={{ $json.params.id }}",
+              "type": "string"
+            },
+            {
+              "id": "59eb7bd5-57cd-4628-b002-e1b8d3f9a4aa",
+              "name": "message",
+              "value": "={{ $json.body.message }}",
+              "type": "string"
+            },
+            {
+              "id": "06b68882-64b0-4d70-9ca4-26345a4e0b85",
+              "name": "agent",
+              "value": "={{ $json.params.agent }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        -160,
+        752
+      ],
+      "id": "e6167afa-ef2c-4987-bc8b-9c6cd8c2eb0f",
+      "name": "Configuration"
+    },
+    {
+      "parameters": {
+        "tableId": "AnalyzerMessage",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "user_id",
+              "fieldValue": "={{ $('Configuration').item.json.user_id }}"
+            },
+            {
+              "fieldId": "message",
+              "fieldValue": "={{ $('Configuration').item.json.message }}"
+            },
+            {
+              "fieldId": "is_user",
+              "fieldValue": "true"
+            },
+            {
+              "fieldId": "id",
+              "fieldValue": "={{ $json.id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        2384,
+        320
+      ],
+      "id": "053564c5-24de-4138-ad01-bfe805fc3add",
+      "name": "Store User Message",
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "WBfQh0FlJT79RsNi",
+          "name": "Supabase account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "tableId": "AnalyzerMessage",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "user_id",
+              "fieldValue": "={{ $('Configuration').item.json.user_id }}"
+            },
+            {
+              "fieldId": "message",
+              "fieldValue": "={{ $('Message an Agent2').item.json.text }}"
+            },
+            {
+              "fieldId": "is_user",
+              "fieldValue": "false"
+            },
+            {
+              "fieldId": "id",
+              "fieldValue": "={{ $json.id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        2384,
+        528
+      ],
+      "id": "0320a08b-45fc-4c42-8127-d6656d9e64cc",
+      "name": "Store Agent Message",
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "WBfQh0FlJT79RsNi",
+          "name": "Supabase account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "GeneratorMessage",
+        "limit": 10,
+        "orderBy": "message_at.desc",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "user_id",
+              "condition": "eq",
+              "keyValue": "={{ $('Configuration').item.json.user_id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1360,
+        848
+      ],
+      "id": "25a673cd-1446-45a9-99c3-76275bb817fa",
+      "name": "Retrieve Message History1",
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "WBfQh0FlJT79RsNi",
+          "name": "Supabase account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nlet memory = { \"memory\": [] }\n\nfor (const item of $input.all()) {\n  memory[\"memory\"].push({ \"message\": item.json.message, \"is_user\": item.json.is_user })\n}\n\nreturn memory ;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1568,
+        848
+      ],
+      "id": "f10c4eff-9405-437e-bfd6-f24afe9083d8",
+      "name": "Memory Compiler1",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "tableId": "GeneratorMessage",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "user_id",
+              "fieldValue": "={{ $('Configuration').item.json.user_id }}"
+            },
+            {
+              "fieldId": "message",
+              "fieldValue": "={{ $('Message an Agent3').item.json.text }}"
+            },
+            {
+              "fieldId": "is_user",
+              "fieldValue": "false"
+            },
+            {
+              "fieldId": "id",
+              "fieldValue": "={{ $json.id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        2864,
+        928
+      ],
+      "id": "df11b632-0c9d-48e6-a807-7520f7013fed",
+      "name": "Store Agent Message1",
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "WBfQh0FlJT79RsNi",
+          "name": "Supabase account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Configuration').item.json.agent }}",
+                    "rightValue": "analyze",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "91f25616-6085-44f0-b451-9778fa4b6841"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "8205fdf9-a319-4583-b5b4-5bc7b5e2e58c",
+                    "leftValue": "={{ $('Configuration').item.json.agent }}",
+                    "rightValue": "generate",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "0d681d7d-ccaf-467f-8107-bc0a279a6f55",
+                    "leftValue": "",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        1088,
+        720
+      ],
+      "id": "3917913d-da80-4dbb-b8eb-5b2b373526c1",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "f91415d8-3bab-4b96-ba1b-d08d15961d09",
+              "leftValue": "={{ $('Configuration').item.json.agent }}",
+              "rightValue": "analyze",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "8d196cfb-5387-43ae-b97c-6370a1a9b733",
+              "leftValue": "={{ $('Configuration').item.json.agent }}",
+              "rightValue": "generate",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        880,
+        752
+      ],
+      "id": "63ac06c1-9cd6-4305-8f68-a14c9450c447",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"message\": \"Invalid Request\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1088,
+        944
+      ],
+      "id": "9a8590f8-389e-4e7d-a7e2-c5dc3fc44c76",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "tableId": "GeneratorMessage",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "user_id",
+              "fieldValue": "={{ $('Configuration').item.json.user_id }}"
+            },
+            {
+              "fieldId": "message",
+              "fieldValue": "={{ $('Message an Agent3').item.json.text }}\n\n{{ $('Message an Agent3').item.json.structuredOutput.message }}"
+            },
+            {
+              "fieldId": "is_user",
+              "fieldValue": "true"
+            },
+            {
+              "fieldId": "id",
+              "fieldValue": "={{ $json.id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        2864,
+        720
+      ],
+      "id": "fbdf0961-8e78-41aa-bf83-ab2493908520",
+      "name": "Store User Message1",
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "WBfQh0FlJT79RsNi",
+          "name": "Supabase account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"tasks\": [],\n  \"message\": \"cannot generate tasks...Please try again\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        2304,
+        1120
+      ],
+      "id": "f0562a4d-fe25-4366-99db-94780bb79031",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1393bf51-3f0f-4fda-b65b-59e5f47990db",
+              "name": "message",
+              "value": "={{ $('Message an Agent3').item.json.structuredOutput.message }}",
+              "type": "string"
+            },
+            {
+              "id": "0a910ce6-2a02-415d-a02d-f7fab6c18540",
+              "name": "tasks",
+              "value": "={{ $json.tasks }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        2432,
+        832
+      ],
+      "id": "fb2bdd5e-ebd1-4273-8fdb-2d664c2fee96",
+      "name": "Set Message and Tasks"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nconst tasks = {\"tasks\": []}\nfor (const item of $input.first().json.structuredOutput.tasks) {\n  tasks[\"tasks\"].push(item)\n}\n\nreturn tasks;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2208,
+        832
+      ],
+      "id": "1b74ff1a-0fa4-4403-8e01-e9ff16976e7f",
+      "name": "Compile Tasks"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "74955b36-7ac2-45a0-bfe5-1a546b9e023f/:id",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        -368,
+        1392
+      ],
+      "id": "81b52a92-c8bf-4252-92c7-7133a37bbb8e",
+      "name": "Webhook",
+      "webhookId": "74955b36-7ac2-45a0-bfe5-1a546b9e023f"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7d96ac96-f0fb-4a6c-bc1b-b09df90be5fe",
+              "name": "user_id",
+              "value": "={{ $json.params.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        -144,
+        1392
+      ],
+      "id": "e58cac31-acba-4b84-b3b9-6c186d594dac",
+      "name": "Overview Configuration"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "Task",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "user_id",
+              "condition": "eq",
+              "keyValue": "={{ $json.user_id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        64,
+        1232
+      ],
+      "id": "74c2a030-3895-42a3-bdcb-dbb98deed174",
+      "name": "Get many rows",
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "WBfQh0FlJT79RsNi",
+          "name": "Supabase account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "Event",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "user_id",
+              "condition": "eq",
+              "keyValue": "={{ $json.user_id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        64,
+        1520
+      ],
+      "id": "05a2a5c1-6cae-45cb-932f-8252fac12585",
+      "name": "Get many rows1",
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "WBfQh0FlJT79RsNi",
+          "name": "Supabase account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const now = $now;\nconst tasks = {\"tasks\": []};\n\nfor (const item of $input.all()) {\n  const start = DateTime.fromISO(item.json.start_time);\n  const end = DateTime.fromISO(item.json.end_time);\n  if (start <= now && end >= now) {\n    tasks[\"tasks\"].push(item);\n  }\n}\n\nreturn tasks;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        256,
+        1232
+      ],
+      "id": "f561e733-d094-4332-8873-ec331a585810",
+      "name": "Filter Activated Tasks",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const now = $now;\nconst events = {\"events\": []};\n\nfor (const item of $input.all()) {\n  const start = DateTime.fromISO(item.json.start_time);\n  const end = DateTime.fromISO(item.json.end_time);\n  if (start <= now && end >= now) {\n    events[\"events\"].push(item);\n  }\n}\n\nreturn events;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        256,
+        1520
+      ],
+      "id": "148dd8f1-8dca-4340-8243-54c1f4169d7e",
+      "name": "Filter Activated Events",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        496,
+        1376
+      ],
+      "id": "94b446de-66ef-4019-bf3e-6c0100eb94aa",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "agentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "F8Y4yFoTJbFnSAw3",
+          "cachedResultName": "Stella AI Analyzer"
+        },
+        "message": "=ADD RULE:\n1. Dont make it markdown, just respond with normal text.\n\nCreate a summary of user's daily tasks and events.\nEvents: {{ JSON.stringify($('Filter Activated Events').first().json.events) }}\n\nTasks: {{ JSON.stringify($('Filter Activated Tasks').item.json.tasks) }}\n",
+        "advanced": {}
+      },
+      "type": "n8n-nodes-base.messageAnAgent",
+      "typeVersion": 3.1,
+      "position": [
+        768,
+        1328
+      ],
+      "id": "89231c86-1716-4147-af26-9bfbf9747cce",
+      "name": "Message an Agent"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"message\": {{ JSON.stringify($json.text) }}\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1216,
+        1376
+      ],
+      "id": "779cf9c5-9498-4f01-969e-f78a8fb90a05",
+      "name": "Respond to Webhook4"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "POST Stella Analyzer1": {
+      "main": [
+        [
+          {
+            "node": "Configuration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge4": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message an Agent2": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Code in JavaScript4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge5": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Store User Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript4": {
+      "main": [
+        [
+          {
+            "node": "Store Agent Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge6": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate User Message ID1": {
+      "main": [
+        [
+          {
+            "node": "Store User Message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Agent Message ID1": {
+      "main": [
+        [
+          {
+            "node": "Store Agent Message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message an Agent3": {
+      "main": [
+        [
+          {
+            "node": "Compile Tasks",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Events": {
+      "main": [
+        [
+          {
+            "node": "Filter Outdated Events",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Tasks": {
+      "main": [
+        [
+          {
+            "node": "Filter Outdated Tasks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Outdated Events": {
+      "main": [
+        [
+          {
+            "node": "Event Compiler",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Outdated Tasks": {
+      "main": [
+        [
+          {
+            "node": "Task Compiler",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Task Compiler": {
+      "main": [
+        [
+          {
+            "node": "Merge4",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Event Compiler": {
+      "main": [
+        [
+          {
+            "node": "Merge4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Retrieve Message History": {
+      "main": [
+        [
+          {
+            "node": "Memory Compiler",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Memory Compiler": {
+      "main": [
+        [
+          {
+            "node": "Message an Agent2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Configuration": {
+      "main": [
+        [
+          {
+            "node": "Get Tasks",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Events",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store User Message": {
+      "main": [
+        [
+          {
+            "node": "Merge5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store Agent Message": {
+      "main": [
+        [
+          {
+            "node": "Merge5",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Retrieve Message History1": {
+      "main": [
+        [
+          {
+            "node": "Memory Compiler1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Memory Compiler1": {
+      "main": [
+        [
+          {
+            "node": "Message an Agent3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store Agent Message1": {
+      "main": [
+        [
+          {
+            "node": "Merge6",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Retrieve Message History",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Retrieve Message History1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store User Message1": {
+      "main": [
+        [
+          {
+            "node": "Merge6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Message and Tasks": {
+      "main": [
+        [
+          {
+            "node": "Generate User Message ID1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Generate Agent Message ID1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compile Tasks": {
+      "main": [
+        [
+          {
+            "node": "Set Message and Tasks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Overview Configuration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Overview Configuration": {
+      "main": [
+        [
+          {
+            "node": "Get many rows",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get many rows1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many rows": {
+      "main": [
+        [
+          {
+            "node": "Filter Activated Tasks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many rows1": {
+      "main": [
+        [
+          {
+            "node": "Filter Activated Events",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Activated Tasks": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Activated Events": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Message an Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message an Agent": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": true
+  },
+  "versionId": "1315c2c5-9d8e-4768-9e9f-5412c3cc8631",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9303a4f42b081e045dba0b8758beea9a612f0d29c4bfcc885a093891ebc720d1"
+  },
+  "nodeGroups": [],
+  "id": "Ax4G0vfF6FTatuWe",
+  "tags": []
+}

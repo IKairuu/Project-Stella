@@ -2,6 +2,7 @@
 import { Injectable } from "@nestjs/common";
 import { prisma } from '../prisma.js';
 import { CreateEvent } from "./dto/CreateEvent.dto.js";
+import { EditEvent } from "./dto/EditEvent.dto.js";
 
 @Injectable()
 export class EventRepository {
@@ -33,5 +34,19 @@ export class EventRepository {
             }
         })
         return events;
+    }
+
+    async editEvent(eventData: EditEvent, userId: string) {
+        await prisma.$transaction(async (tx) => {
+            await tx.event.update({
+                where: { id: eventData.id, user_id: userId },
+                data: {
+                    title: eventData.title,
+                    description: eventData.description,
+                    start_time: eventData.start_time,
+                    end_time: eventData.end_time
+                }
+            })
+        })
     }
 }

@@ -1,8 +1,9 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, Headers, Post, UseGuards, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Headers, Patch, Post, UseGuards, ValidationPipe } from '@nestjs/common';
 import { EventService } from './event.service.js';
 import { AuthGuard } from '../auth/auth.guard.js';
 import { CreateEvent } from './dto/CreateEvent.dto.js';
+import { EditEvent } from './dto/EditEvent.dto.js';
 
 @Controller('events')
 export class EventController {
@@ -18,6 +19,12 @@ export class EventController {
     @Get('v1')
     getEvents(@Headers('authorization') auth: string) {
         return this.eventService.getEvents(auth)
+    }
+
+    @UseGuards(AuthGuard)
+    @Patch('v1')
+    editEvents(@Headers('authorization') auth: string, @Body(ValidationPipe) eventData: EditEvent) {
+        return this.eventService.editEvents(auth, eventData)
     }
 
 }

@@ -29,4 +29,8 @@ export class SessionService implements OnModuleInit, OnModuleDestroy {
     async logoutSession(sessionToken: string) {
         await this.client.del(`session:${sessionToken}`)
     }
+
+    async verifySession(sessionId: string) {
+        return await this.client.hGetAll(`session:${sessionId}`)
+    }
 }

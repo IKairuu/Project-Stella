@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { IsBoolean, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
 export class UserLoginCredential {
     @IsString()
@@ -13,4 +13,8 @@ export class UserLoginCredential {
     @IsString()
     @IsOptional()
     id_token!: string
+
+    @IsBoolean()
+    @IsNotEmpty()
+    create_session!: boolean
 }

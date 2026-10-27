@@ -77,7 +77,9 @@ export class UserService {
         }
 
         const token = await this.jwtService.sign({user_id: payload["id"], type: payload["type"]}, {expiresIn: '3h'})
-        await this.sessionService.signSession(token, payload) // refactor this
+        if (userLoginCredentials.create_session){
+            await this.sessionService.signSession(token, payload) // refactor this
+        }
         payload = {...payload, token: token}
         return payload;
     }

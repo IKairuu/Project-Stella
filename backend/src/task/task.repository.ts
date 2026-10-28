@@ -53,4 +53,15 @@ export class TaskRepository {
             })
         })
     }
+
+    async deleteTask(taskId: string, userId: string){
+        await prisma.$transaction(async (tx) => {
+            await tx.task.delete({
+                where: {
+                    id: taskId,
+                    user_id: userId
+                }
+            })
+        })
+    }
 }

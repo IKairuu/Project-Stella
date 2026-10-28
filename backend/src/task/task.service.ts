@@ -26,4 +26,10 @@ export class TaskService {
         await this.taskRepository.editTasks(taskData, authId)
         return { message: "Task Successfully Updated" }
     }
+
+    async deleteTask(token: string, taskId: string) {
+        const authId = await this.authService.verifySessionToken(token.replace('Bearer ', ''))
+        await this.taskRepository.deleteTask(taskId, authId)
+        return { message: "Task Successfully removed" }
+    }
 }

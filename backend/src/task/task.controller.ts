@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, Headers, HttpCode, Patch, Post, UseGuards, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Headers, HttpCode, Param, Patch, Post, UseGuards, ValidationPipe } from '@nestjs/common';
 import { TaskService } from './task.service.js';
 import {  CreateTasks } from './dto/CreateTasks.js';
 import { AuthGuard } from '../auth/auth.guard.js';
@@ -28,5 +28,12 @@ export class TaskController {
     @HttpCode(200)
     editTasks(@Headers('authorization') auth: string, @Body(ValidationPipe) taskData: EditTasks) {
         return this.taskService.editTasks(auth, taskData);
+    }
+
+    @UseGuards(AuthGuard)
+    @Delete('v1/:id')
+    @HttpCode(200)
+    deleteTask(@Headers('authorization') auth: string, @Param('id') taskId: string) {
+        return this.taskService.deleteTask(auth, taskId)
     }
 }

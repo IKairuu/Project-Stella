@@ -49,4 +49,15 @@ export class EventRepository {
             })
         })
     }
+
+    async deleteEvent(eventId: string, authId: string) {
+        await prisma.$transaction(async (tx) => {
+            await tx.event.delete({
+                where: {
+                    id: eventId,
+                    user_id: authId
+                }
+            })
+        })
+    }
 }

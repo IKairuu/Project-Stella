@@ -28,4 +28,10 @@ export class EventService {
         await this.eventRepository.editEvent(eventData, authId)
         return { message: "Event Successfully Updated" }
     }
+
+    async deleteEvent(token: string, eventId: string) {
+        const authId = await this.authService.verifySessionToken(token.replace("Bearer ", ''))
+        await this.eventRepository.deleteEvent(eventId, authId)
+        return { message: "Successfully removed" }
+    }
 }

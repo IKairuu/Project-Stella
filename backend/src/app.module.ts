@@ -13,7 +13,7 @@ import { SessionModule } from './session/session.module.js';
 import { CompanionGateway } from './companion/companion.gateway.js';
 import { CompanionService } from './companion/companion.service.js';
 import { Service } from './companion/service/service.js';
-import { MessageModule } from './message/message.module';
+import { MessageModule } from './message/message.module.js';
 
 @Module({
   imports: [HttpModule.register({ timeout: 5000, maxRedirects: 5 }), 

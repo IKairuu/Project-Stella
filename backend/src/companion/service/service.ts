@@ -17,10 +17,12 @@ export class Service {
     }
 
     async getSummary(body: Summary) {
-        const res = await fetch(`http://localhost:5678/webhook/74955b36-7ac2-45a0-bfe5-1a546b9e023f/74955b36-7ac2-45a0-bfe5-1a546b9e023f/${body.id}`, 
+        const res = await fetch(`http://localhost:5678/webhook/74955b36-7ac2-45a0-bfe5-1a546b9e023f`, 
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+
+                body: JSON.stringify({ id:  body.id})
             }
         )
         return await res.json(); 

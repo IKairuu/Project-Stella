@@ -4,6 +4,7 @@ import { TaskService } from './task.service.js';
 import {  CreateTasks } from './dto/CreateTasks.js';
 import { AuthGuard } from '../auth/auth.guard.js';
 import { EditTasks } from './dto/EditTasks.js';
+import { CreateTaskBulk } from './dto/CreateTaskBulk.dto.js';
 
 @Controller('tasks')
 export class TaskController {
@@ -35,5 +36,12 @@ export class TaskController {
     @HttpCode(200)
     deleteTask(@Headers('authorization') auth: string, @Param('id') taskId: string) {
         return this.taskService.deleteTask(auth, taskId)
+    }
+
+    @UseGuards(AuthGuard)
+    @Post('v1/bulk-create')
+    @HttpCode(200)
+    createBulkTask(@Body(ValidationPipe) bulkTask: CreateTaskBulk, @Headers('authorization') auth: string) {
+        return this.taskService.createBulkTask(bulkTask, auth)
     }
 }

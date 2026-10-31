@@ -20,6 +20,18 @@ export class CompanionGateway {
     client.emit('generate', response)
   }
 
+  @SubscribeMessage('analyze-test')
+  async handleAnalyzerTest(client: any, payload: any){
+    const response = await this.companionService.handleMessageTest(payload)
+    client.emit('analyze-test', response) 
+  }
+
+  @SubscribeMessage('generate-test')
+  async handleGeneratorTest(client: any, payload: any) {
+    const response = await this.companionService.handleMessageTest(payload)
+    client.emit('generate-test', response)
+  }
+
   @SubscribeMessage('summary')
   async handleSummary(client: any, payload:any) {
     const response = await this.companionService.handleSummary(payload)

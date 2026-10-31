@@ -12,6 +12,10 @@ export class CompanionService {
         return await this.service.postMessage(payload); 
     }
 
+    async handleMessageTest(payload: Message) {
+        return await this.service.postMessageTest(payload); 
+    }
+
     async handleSummary(payload: Summary) {
         return await this.service.getSummary(payload); 
     }

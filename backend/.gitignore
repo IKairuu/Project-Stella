@@ -58,3 +58,6 @@ node_modules/
 dist/
 
 /generated/prisma
+
+firebase-service-account.json
+GoogleService-Info.plist

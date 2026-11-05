@@ -16,6 +16,7 @@ export class AuthService {
 
     async verifyIdToken(idToken: string): Promise<string> {
         try {
+            console.log((await getAuth().verifyIdToken(idToken)).uid)
             return (await getAuth().verifyIdToken(idToken)).uid
         } catch {
              throw new UnauthorizedException('Invalid Google token');

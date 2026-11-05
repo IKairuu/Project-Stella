@@ -29,13 +29,21 @@ export class UserService {
         catch {
             throw new UnauthorizedException("Invalid Token")
         }
-        const saltRounds = 10;
-        const hash = await bcrypt.hash(userCredentials.password, saltRounds);
-        userCredentials.password = hash ;
-        const credentials = await this.userRepository.registerUserCredentials(userCredentials);
-        const token = this.jwtService.sign({user_id: credentials["id"], type: credentials["type"]}, {expiresIn: '10m'})
-        const payload = { credentials: credentials, token: token }
-        return payload;
+
+        try {
+            const saltRounds = 10;
+            const hash = await bcrypt.hash(userCredentials.password, saltRounds);
+            userCredentials.password = hash ;
+            const credentials = await this.userRepository.registerUserCredentials(userCredentials);
+            const token = this.jwtService.sign({user_id: credentials["id"], type: credentials["type"]}, {expiresIn: '10m'})
+            const payload = { credentials: credentials, token: token }
+            console.log(payload.credentials)
+            return payload;
+        } catch (error) {
+            throw new UnauthorizedException(error)
+        }
+        
+        
     }
 
     async loginUser(loginType: string, userLoginCredentials: UserLoginCredential) {

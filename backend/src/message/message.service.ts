@@ -9,11 +9,11 @@ export class MessageService {
 
     async getMessages(token: string, agent: string) {
         const authId = await this.authService.verifySessionToken(token.replace('Bearer ', ''))
-        if (agent == 'analyzer') {
+        if (agent == 'analyze') {
             const messages = await this.messageRepository.getAnalyzerMessages(authId)
             return { messages: messages }
         }
-        else if (agent == 'generator') {
+        else if (agent == 'generate') {
             const messages = await this.messageRepository.getGeneratorMessages(authId)
             return { messages: messages }
         }

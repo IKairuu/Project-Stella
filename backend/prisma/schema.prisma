@@ -81,10 +81,11 @@ model AnalyzerMessage {
 }
 
 model GeneratorMessage {
-  id         String   @id @default(uuid())
-  user_id    String
-  message    String
-  is_user    Boolean
-  message_at DateTime @default(now())
-  userId     User     @relation(fields: [user_id], references: [id])
+  id              String   @id @default(uuid())
+  user_id         String
+  message         String
+  generated_tasks Json?
+  is_user         Boolean
+  message_at      DateTime @default(now())
+  userId          User     @relation(fields: [user_id], references: [id])
 }

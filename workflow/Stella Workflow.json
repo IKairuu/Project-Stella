@@ -166,7 +166,7 @@
           "value": "E79Hfb5or58aMIKN",
           "cachedResultName": "Stella Task Generator"
         },
-        "message": "={{ $('Configuration').item.json.message }}\n\nEvents: {{ JSON.stringify($('Event Compiler').first().json.events) }}\n\nTasks: {{ JSON.stringify($('Task Compiler').first().json.tasks) }}\n\nMemory: { {{ JSON.stringify($input.first().json.memory) }} }",
+        "message": "=User Input: {{ $('Configuration').item.json.message }}\n\nEvents: {{ JSON.stringify($('Event Compiler').first().json.events) }}\n\nTasks: {{ JSON.stringify($('Task Compiler').first().json.tasks) }}\n\nMemory: { {{ JSON.stringify($input.first().json.memory) }} }",
         "useStructuredOutput": true,
         "schemaType": "manual",
         "outputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"tasks\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"event_id\":    { \"type\": \"string\" },\n          \"task_name\":   { \"type\": \"string\" },\n          \"task_detail\": { \"type\": \"string\" },\n          \"priority\":    { \"type\": \"string\", \"enum\": [\"low\", \"medium\", \"high\"] },\n          \"complexity\":  { \"type\": \"string\", \"enum\": [\"easy\", \"medium\", \"hard\"] },\n          \"start_time\":  { \"type\": \"string\", \"format\": \"date-time\" },\n          \"end_time\":    { \"type\": \"string\", \"format\": \"date-time\" }\n        },\n        \"required\": [\"event_id\", \"task_name\", \"task_detail\", \"priority\", \"complexity\", \"start_time\", \"end_time\"]\n      }\n    },\n    \"message\": { \"type\": \"string\" }\n  },\n  \"required\": [\"tasks\", \"message\"]\n}",
@@ -559,7 +559,7 @@
             },
             {
               "fieldId": "message",
-              "fieldValue": "={{ $('Message an Agent3').item.json.text }}"
+              "fieldValue": "={{ $('Set Message and Tasks').item.json.message }}"
             },
             {
               "fieldId": "is_user",
@@ -568,6 +568,10 @@
             {
               "fieldId": "id",
               "fieldValue": "={{ $json.id }}"
+            },
+            {
+              "fieldId": "generated_tasks",
+              "fieldValue": "={{ $('Set Message and Tasks').item.json.tasks }}"
             }
           ]
         }
@@ -742,7 +746,7 @@
             },
             {
               "fieldId": "message",
-              "fieldValue": "={{ $('Message an Agent3').item.json.text }}\n\n{{ $('Message an Agent3').item.json.structuredOutput.message }}"
+              "fieldValue": "={{ $('Configuration').item.json.message }}"
             },
             {
               "fieldId": "is_user",
@@ -780,8 +784,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        2304,
-        1120
+        2208,
+        1008
       ],
       "id": "f0562a4d-fe25-4366-99db-94780bb79031",
       "name": "Respond to Webhook1"
@@ -831,7 +835,7 @@
     {
       "parameters": {
         "httpMethod": "POST",
-        "path": "74955b36-7ac2-45a0-bfe5-1a546b9e023f/:id",
+        "path": "74955b36-7ac2-45a0-bfe5-1a546b9e023f",
         "responseMode": "responseNode",
         "options": {}
       },
@@ -852,7 +856,7 @@
             {
               "id": "7d96ac96-f0fb-4a6c-bc1b-b09df90be5fe",
               "name": "user_id",
-              "value": "={{ $json.params.id }}",
+              "value": "={{ $json.body.id }}",
               "type": "string"
             }
           ]
@@ -930,7 +934,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const now = $now;\nconst tasks = {\"tasks\": []};\n\nfor (const item of $input.all()) {\n  const start = DateTime.fromISO(item.json.start_time);\n  const end = DateTime.fromISO(item.json.end_time);\n  if (start <= now && end >= now) {\n    tasks[\"tasks\"].push(item);\n  }\n}\n\nreturn tasks;"
+        "jsCode": "const today = new Date();\nconst tasks = [];\n\nfor (const item of $input.all()) {\n  const startDay = new Date(item.json.start_time);\n  const endDay = new Date(item.json.end_time);\n  if (startDay <= today && endDay >= today) {\n    tasks.push({taskName: item.json.task_name, detail: item.json.task_detail, startTime: item.json.start_time, endTime: item.json.end_time});\n  }\n}\n\nreturn [{ json: { tasks } }];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -944,7 +948,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const now = $now;\nconst events = {\"events\": []};\n\nfor (const item of $input.all()) {\n  const start = DateTime.fromISO(item.json.start_time);\n  const end = DateTime.fromISO(item.json.end_time);\n  if (start <= now && end >= now) {\n    events[\"events\"].push(item);\n  }\n}\n\nreturn events;"
+        "jsCode": "const today = new Date();\nconst events = [];\n\nfor (const item of $input.all()) {\n  const startDay = new Date(item.json.start_time);\n  const endDay = new Date(item.json.end_time);\n  if (startDay <= today && endDay >= today) {\n    events.push({title: item.json.title, description: item.json.description, startTime: item.json.start_time, endTime: item.json.end_time});\n  }\n}\n\nreturn [{ json: { events } }];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -975,7 +979,7 @@
           "value": "F8Y4yFoTJbFnSAw3",
           "cachedResultName": "Stella AI Analyzer"
         },
-        "message": "=ADD RULE:\n1. Dont make it markdown, just respond with normal text.\n\nCreate a summary of user's daily tasks and events.\nEvents: {{ JSON.stringify($('Filter Activated Events').first().json.events) }}\n\nTasks: {{ JSON.stringify($('Filter Activated Tasks').item.json.tasks) }}\n",
+        "message": "=Events: {{ JSON.stringify($('Filter Activated Events').first().json.events) }}\n\nTasks: {{ JSON.stringify($('Filter Activated Tasks').item.json.tasks) }}\n",
         "advanced": {}
       },
       "type": "n8n-nodes-base.messageAnAgent",
@@ -1461,7 +1465,7 @@
     "binaryMode": "separate",
     "availableInMCP": true
   },
-  "versionId": "1315c2c5-9d8e-4768-9e9f-5412c3cc8631",
+  "versionId": "d1fe8021-e5d9-428a-aae9-94c1b43906ec",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "9303a4f42b081e045dba0b8758beea9a612f0d29c4bfcc885a093891ebc720d1"

@@ -38,14 +38,15 @@ export class TaskRepository {
         return tasks
     }
 
-    async getTaskConflict(startTime: Date, endTime: Date, userId: string) {
+    async getTaskConflict(startTime: Date, endTime: Date, userId: string, taskId?: string) {
         const tasks = await prisma.task.findMany({
             where: {
                 user_id: userId,
                 OR: [
                     {start_time: { gte: new Date() }},
                     {end_time: { gte: new Date() }}
-                ]
+                ],
+                ...(taskId ? { id: {not: taskId}} : {})
             },
             select: {
                 start_time: true,

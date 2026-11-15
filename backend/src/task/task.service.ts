@@ -33,7 +33,7 @@ export class TaskService {
 
     async editTasks(token: string, taskData: EditTasks) {
         const authId = await this.authService.verifySessionToken(token.replace('Bearer ', ''))
-        const taskConflict = await this.taskRepository.getTaskConflict(new Date(taskData.start_time), new Date(taskData.end_time), authId)
+        const taskConflict = await this.taskRepository.getTaskConflict(new Date(taskData.start_time), new Date(taskData.end_time), authId, taskData.id)
         taskConflict.map((tasks) => {
             if (tasks.start_time.getTime() < new Date(taskData
                 .end_time

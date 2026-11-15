@@ -38,6 +38,23 @@ export class TaskRepository {
         return tasks
     }
 
+    async getTaskConflict(startTime: Date, endTime: Date, userId: string) {
+        const tasks = await prisma.task.findMany({
+            where: {
+                user_id: userId,
+                OR: [
+                    {start_time: { gte: new Date() }},
+                    {end_time: { gte: new Date() }}
+                ]
+            },
+            select: {
+                start_time: true,
+                end_time: true
+            }
+        })
+        return tasks
+    }
+
     async editTasks(taskData: EditTasks, userId: string) {
         await prisma.$transaction(async (tx) => {
             await tx.task.update({

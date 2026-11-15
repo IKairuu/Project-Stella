@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-for-in-array */
 /* eslint-disable prettier/prettier */
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { TaskRepository } from './task.repository.js';
 import { CreateTasks } from './dto/CreateTasks.js';
 import { AuthService } from '../auth/auth.service.js';
@@ -12,7 +13,15 @@ export class TaskService {
 
     async createTask(createTask: CreateTasks, token: string) {
         const authId = await this.authService.verifySessionToken(token.replace('Bearer ', ''))
-        await this.taskRepository.createTask(createTask, authId)
+        const taskConflict = await this.taskRepository.getTaskConflict(new Date(createTask.start_time), new Date(createTask.end_time), authId)
+        taskConflict.map((tasks) => {
+            if (tasks.start_time.getTime() < new Date(createTask
+                .end_time
+            ).getTime() && new Date(createTask.start_time).getTime() < tasks.end_time.getTime()){
+                throw new ConflictException("Task is already assigned at this time")
+            }
+        })
+        await this.taskRepository.createTask(createTask, authId) 
         return {message: "Task Successfully Created"}
     }
 
@@ -25,6 +34,14 @@ export class TaskService {
     async editTasks(token: string, taskData: EditTasks) {
         const authId = await this.authService.verifySessionToken(token.replace('Bearer ', ''))
         await this.taskRepository.editTasks(taskData, authId)
+        const taskConflict = await this.taskRepository.getTaskConflict(new Date(taskData.start_time), new Date(taskData.end_time), authId)
+        taskConflict.map((tasks) => {
+            if (tasks.start_time.getTime() < new Date(taskData
+                .end_time
+            ).getTime() && new Date(taskData.start_time).getTime() < tasks.end_time.getTime()){
+                throw new ConflictException("Task is already assigned at this time")
+            }
+        })
         return { message: "Task Successfully Updated" }
     }
 

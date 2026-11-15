@@ -33,7 +33,6 @@ export class TaskService {
 
     async editTasks(token: string, taskData: EditTasks) {
         const authId = await this.authService.verifySessionToken(token.replace('Bearer ', ''))
-        await this.taskRepository.editTasks(taskData, authId)
         const taskConflict = await this.taskRepository.getTaskConflict(new Date(taskData.start_time), new Date(taskData.end_time), authId)
         taskConflict.map((tasks) => {
             if (tasks.start_time.getTime() < new Date(taskData
@@ -42,6 +41,7 @@ export class TaskService {
                 throw new ConflictException("Task is already assigned at this time")
             }
         })
+        await this.taskRepository.editTasks(taskData, authId)
         return { message: "Task Successfully Updated" }
     }
 

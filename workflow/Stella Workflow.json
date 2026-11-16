@@ -11,7 +11,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.2,
       "position": [
-        -352,
+        -528,
         752
       ],
       "id": "8a57c9d2-31eb-4346-b768-11e42b785967",
@@ -23,7 +23,7 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        656,
+        880,
         752
       ],
       "id": "633635ac-bc83-4dba-b7f4-58ee717c14f9",
@@ -38,13 +38,13 @@
           "mode": "list",
           "cachedResultName": "Stella AI Analyzer"
         },
-        "message": "=User Message: {{ $('Configuration').item.json.message }}\n\nEvents: {{ JSON.stringify($('Event Compiler').first().json.events) }}\n\nTasks: {{ JSON.stringify($('Task Compiler').first().json.tasks) }}\n\nMemory: { {{ JSON.stringify($input.first().json.memory) }} }",
+        "message": "=User Message: {{ $('Configuration').item.json.message }}\n\nReal and Current Time: {{ $('Configuration').item.json.real_time }}\n\nEvents: {{ JSON.stringify($('Event Compiler').first().json.events) }}\n\nTasks: {{ JSON.stringify($('Task Compiler').first().json.tasks) }}\n\nMemory: { {{ JSON.stringify($input.first().json.memory) }} }",
         "advanced": {}
       },
       "type": "n8n-nodes-base.messageAnAgent",
       "typeVersion": 3.1,
       "position": [
-        1728,
+        1952,
         400
       ],
       "id": "be2fcaf1-f857-4ed9-882d-2db6d6ea0eeb",
@@ -59,7 +59,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        2928,
+        3152,
         448
       ],
       "id": "33fd6450-b9ed-45a2-b2ff-69c55d0e25c1",
@@ -72,7 +72,7 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        2624,
+        2848,
         448
       ],
       "id": "529a90e3-2ab7-42f7-b1a9-fac8bcbfd482",
@@ -85,7 +85,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2176,
+        2400,
         320
       ],
       "id": "9fc26283-dfae-4b77-98fd-6eddcc08d9f5",
@@ -98,7 +98,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2176,
+        2400,
         528
       ],
       "id": "290b82cd-4d34-4e4f-8084-7f6639fd18c8",
@@ -113,7 +113,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        3360,
+        3584,
         848
       ],
       "id": "5be6ffe2-824c-4d75-af0c-bf57521a91d2",
@@ -126,7 +126,7 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        3104,
+        3328,
         848
       ],
       "id": "9562f2bb-8a5a-464f-a4f5-d156cfe6b033",
@@ -139,7 +139,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2656,
+        2880,
         720
       ],
       "id": "9fffc862-63bd-457d-adc0-9f3b6c5f3fb0",
@@ -152,7 +152,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2656,
+        2880,
         928
       ],
       "id": "df552ed4-dd15-45cb-97c9-699b2a1a8cc0",
@@ -166,7 +166,7 @@
           "value": "E79Hfb5or58aMIKN",
           "cachedResultName": "Stella Task Generator"
         },
-        "message": "=User Input: {{ $('Configuration').item.json.message }}\n\nEvents: {{ JSON.stringify($('Event Compiler').first().json.events) }}\n\nTasks: {{ JSON.stringify($('Task Compiler').first().json.tasks) }}\n\nMemory: { {{ JSON.stringify($input.first().json.memory) }} }",
+        "message": "=User Input: {{ $('Configuration').item.json.message }}\n\nReal and Current Time: {{ $('Configuration').item.json.real_time }}\n\nEvents: {{ JSON.stringify($('Event Compiler').first().json.events) }}\n\nTasks: {{ JSON.stringify($('Task Compiler').first().json.tasks) }}\n\nMemory: { {{ JSON.stringify($input.first().json.memory) }} }",
         "useStructuredOutput": true,
         "schemaType": "manual",
         "outputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"tasks\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"event_id\":    { \"type\": \"string\" },\n          \"task_name\":   { \"type\": \"string\" },\n          \"task_detail\": { \"type\": \"string\" },\n          \"priority\":    { \"type\": \"string\", \"enum\": [\"low\", \"medium\", \"high\"] },\n          \"complexity\":  { \"type\": \"string\", \"enum\": [\"easy\", \"medium\", \"hard\"] },\n          \"start_time\":  { \"type\": \"string\", \"format\": \"date-time\" },\n          \"end_time\":    { \"type\": \"string\", \"format\": \"date-time\" }\n        },\n        \"required\": [\"event_id\", \"task_name\", \"task_detail\", \"priority\", \"complexity\", \"start_time\", \"end_time\"]\n      }\n    },\n    \"message\": { \"type\": \"string\" }\n  },\n  \"required\": [\"tasks\", \"message\"]\n}",
@@ -175,7 +175,7 @@
       "type": "n8n-nodes-base.messageAnAgent",
       "typeVersion": 3.1,
       "position": [
-        1744,
+        1968,
         816
       ],
       "id": "d33164e3-6070-49fb-87cc-ea0b6954a45b",
@@ -202,7 +202,7 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        64,
+        288,
         656
       ],
       "id": "b61e54b3-cc63-46de-9f29-2ef1c4ed464e",
@@ -232,7 +232,7 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        64,
+        288,
         848
       ],
       "id": "e1ec186d-799d-4fb5-896a-ae3c8b41b700",
@@ -272,7 +272,7 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.3,
       "position": [
-        256,
+        480,
         656
       ],
       "id": "0ea846c7-72bc-4c49-835a-f02e507d4ad0",
@@ -306,7 +306,7 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.3,
       "position": [
-        256,
+        480,
         848
       ],
       "id": "d7174592-8bd6-4a5f-b8b8-8e8d4b2a8159",
@@ -315,12 +315,12 @@
     },
     {
       "parameters": {
-        "jsCode": "let tasks = { \"tasks\": [] }\nfor (const item of $input.all()) {\n  tasks[\"tasks\"].push(item.json)\n}\n\nreturn tasks;"
+        "jsCode": "let tasks = { \"tasks\": [] }\nfor (const item of $input.all()) {\n  tasks[\"tasks\"].push({\n    event_id: item.json.event_id,\n    task_name: item.json.task_name,\n    task_detail: item.json.task_detail,\n    priority: item.json.priority,\n    complexity: item.json.complexity,\n    start_time: item.json.start_time,\n    end_time: item.json.end_time\n  })\n}\n\nreturn tasks;"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        432,
+        656,
         848
       ],
       "id": "b0cdf3f6-94de-43a1-b0f8-8fdbc213a6aa",
@@ -329,12 +329,12 @@
     },
     {
       "parameters": {
-        "jsCode": "let events = { \"events\": [] }\nfor (const item of $input.all()) {\n  events[\"events\"].push(item.json)\n}\n\nreturn events;"
+        "jsCode": "let events = { \"events\": [] }\nfor (const item of $input.all()) {\n  events[\"events\"].push({\n    id: item.json.id,\n    title: item.json.title,\n    decription: item.json.description,\n    start_time: item.json.start_time,\n    end_time: item.json.end_time\n  })\n}\n\nreturn events;"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        432,
+        656,
         656
       ],
       "id": "69129d73-f03a-49df-b903-f24fbbd84fe8",
@@ -360,7 +360,7 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        1360,
+        1584,
         448
       ],
       "id": "bb3ddb15-ca2d-4ce2-a567-e291397e0083",
@@ -380,7 +380,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1520,
+        1744,
         448
       ],
       "id": "7d7cad3b-a500-45d7-bedd-19455c2a28d5",
@@ -394,19 +394,25 @@
             {
               "id": "3d43fa3a-c305-4765-87c6-76b122e32a0b",
               "name": "user_id",
-              "value": "={{ $json.params.id }}",
+              "value": "={{ $('POST Stella Analyzer1').item.json.params.id }}",
               "type": "string"
             },
             {
               "id": "59eb7bd5-57cd-4628-b002-e1b8d3f9a4aa",
               "name": "message",
-              "value": "={{ $json.body.message }}",
+              "value": "={{ $('POST Stella Analyzer1').item.json.body.message }}",
               "type": "string"
             },
             {
               "id": "06b68882-64b0-4d70-9ca4-26345a4e0b85",
               "name": "agent",
-              "value": "={{ $json.params.agent }}",
+              "value": "={{ $('POST Stella Analyzer1').item.json.params.agent }}",
+              "type": "string"
+            },
+            {
+              "id": "8345df88-fe73-4e4b-922e-8e0d8abee864",
+              "name": "real_time",
+              "value": "={{ $json.current_time }}",
               "type": "string"
             }
           ]
@@ -416,7 +422,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.5,
       "position": [
-        -160,
+        64,
         752
       ],
       "id": "e6167afa-ef2c-4987-bc8b-9c6cd8c2eb0f",
@@ -449,7 +455,7 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        2384,
+        2608,
         320
       ],
       "id": "053564c5-24de-4138-ad01-bfe805fc3add",
@@ -489,7 +495,7 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        2384,
+        2608,
         528
       ],
       "id": "0320a08b-45fc-4c42-8127-d6656d9e64cc",
@@ -521,7 +527,7 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        1360,
+        1584,
         848
       ],
       "id": "25a673cd-1446-45a9-99c3-76275bb817fa",
@@ -541,7 +547,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1568,
+        1792,
         848
       ],
       "id": "f10c4eff-9405-437e-bfd6-f24afe9083d8",
@@ -579,7 +585,7 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        2864,
+        3088,
         928
       ],
       "id": "df11b632-0c9d-48e6-a807-7520f7013fed",
@@ -671,7 +677,7 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        1088,
+        1312,
         720
       ],
       "id": "3917913d-da80-4dbb-b8eb-5b2b373526c1",
@@ -714,7 +720,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        880,
+        1104,
         752
       ],
       "id": "63ac06c1-9cd6-4305-8f68-a14c9450c447",
@@ -729,7 +735,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        1088,
+        1312,
         944
       ],
       "id": "9a8590f8-389e-4e7d-a7e2-c5dc3fc44c76",
@@ -762,7 +768,7 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        2864,
+        3088,
         720
       ],
       "id": "fbdf0961-8e78-41aa-bf83-ab2493908520",
@@ -784,7 +790,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        2208,
+        2432,
         1008
       ],
       "id": "f0562a4d-fe25-4366-99db-94780bb79031",
@@ -813,7 +819,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.5,
       "position": [
-        2432,
+        2656,
         832
       ],
       "id": "fb2bdd5e-ebd1-4273-8fdb-2d664c2fee96",
@@ -826,7 +832,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2208,
+        2432,
         832
       ],
       "id": "1b74ff1a-0fa4-4403-8e01-e9ff16976e7f",
@@ -842,7 +848,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.2,
       "position": [
-        -368,
+        -528,
         1392
       ],
       "id": "81b52a92-c8bf-4252-92c7-7133a37bbb8e",
@@ -856,7 +862,13 @@
             {
               "id": "7d96ac96-f0fb-4a6c-bc1b-b09df90be5fe",
               "name": "user_id",
-              "value": "={{ $json.body.id }}",
+              "value": "={{ $('Webhook').item.json.body.id }}",
+              "type": "string"
+            },
+            {
+              "id": "013f2c17-2bad-4d2e-836c-bc17d490465d",
+              "name": "real_time",
+              "value": "={{ $json.current_time }}",
               "type": "string"
             }
           ]
@@ -866,7 +878,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.5,
       "position": [
-        -144,
+        80,
         1392
       ],
       "id": "e58cac31-acba-4b84-b3b9-6c186d594dac",
@@ -889,7 +901,7 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        64,
+        288,
         1232
       ],
       "id": "74c2a030-3895-42a3-bdcb-dbb98deed174",
@@ -919,7 +931,7 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        64,
+        288,
         1520
       ],
       "id": "05a2a5c1-6cae-45cb-932f-8252fac12585",
@@ -939,7 +951,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        256,
+        480,
         1232
       ],
       "id": "f561e733-d094-4332-8873-ec331a585810",
@@ -953,7 +965,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        256,
+        480,
         1520
       ],
       "id": "148dd8f1-8dca-4340-8243-54c1f4169d7e",
@@ -965,7 +977,7 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        496,
+        720,
         1376
       ],
       "id": "94b446de-66ef-4019-bf3e-6c0100eb94aa",
@@ -979,13 +991,13 @@
           "value": "F8Y4yFoTJbFnSAw3",
           "cachedResultName": "Stella AI Analyzer"
         },
-        "message": "=Events: {{ JSON.stringify($('Filter Activated Events').first().json.events) }}\n\nTasks: {{ JSON.stringify($('Filter Activated Tasks').item.json.tasks) }}\n",
+        "message": "=Events: {{ JSON.stringify($('Filter Activated Events').first().json.events) }}\n\nReal and Current Time: {{ $('Overview Configuration').item.json.real_time }}\n\nTasks: {{ JSON.stringify($('Filter Activated Tasks').item.json.tasks) }}\n",
         "advanced": {}
       },
       "type": "n8n-nodes-base.messageAnAgent",
       "typeVersion": 3.1,
       "position": [
-        768,
+        992,
         1328
       ],
       "id": "89231c86-1716-4147-af26-9bfbf9747cce",
@@ -1000,11 +1012,65 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        1216,
+        1440,
         1376
       ],
       "id": "779cf9c5-9498-4f01-969e-f78a8fb90a05",
       "name": "Respond to Webhook4"
+    },
+    {
+      "parameters": {
+        "url": "https://time.now/developer/api/timezone/Asia/Manila",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        -336,
+        752
+      ],
+      "id": "fbf07a9d-1170-458b-a957-147325571af3",
+      "name": "Fetch Asia/Manila Time"
+    },
+    {
+      "parameters": {
+        "jsCode": "\nreturn { \"current_time\": new Date($input.first().json.datetime).toLocaleString(\"en-PH\", {\n  timeZone: \"Asia/Manila\",\n  dateStyle: \"medium\",\n  timeStyle: \"short\"\n})\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -112,
+        752
+      ],
+      "id": "346905eb-4ef9-47fd-bf19-30e7960a93a6",
+      "name": "Time Formatter"
+    },
+    {
+      "parameters": {
+        "url": "https://time.now/developer/api/timezone/Asia/Manila",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        -320,
+        1392
+      ],
+      "id": "f96de0dc-75cd-4404-97fb-20d1ac41c448",
+      "name": "Fetch Asia/Manila Time1"
+    },
+    {
+      "parameters": {
+        "jsCode": "\nreturn { \"current_time\": new Date($input.first().json.datetime).toLocaleString(\"en-PH\", {\n  timeZone: \"Asia/Manila\",\n  dateStyle: \"medium\",\n  timeStyle: \"short\"\n})\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -96,
+        1392
+      ],
+      "id": "408669ca-efb2-449e-b90a-51deee966153",
+      "name": "Time Formatter1"
     }
   ],
   "pinData": {},
@@ -1013,7 +1079,7 @@
       "main": [
         [
           {
-            "node": "Configuration",
+            "node": "Fetch Asia/Manila Time",
             "type": "main",
             "index": 0
           }
@@ -1369,7 +1435,7 @@
       "main": [
         [
           {
-            "node": "Overview Configuration",
+            "node": "Fetch Asia/Manila Time1",
             "type": "main",
             "index": 0
           }
@@ -1457,6 +1523,50 @@
           }
         ]
       ]
+    },
+    "Fetch Asia/Manila Time": {
+      "main": [
+        [
+          {
+            "node": "Time Formatter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Time Formatter": {
+      "main": [
+        [
+          {
+            "node": "Configuration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Asia/Manila Time1": {
+      "main": [
+        [
+          {
+            "node": "Time Formatter1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Time Formatter1": {
+      "main": [
+        [
+          {
+            "node": "Overview Configuration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
@@ -1465,7 +1575,7 @@
     "binaryMode": "separate",
     "availableInMCP": true
   },
-  "versionId": "d1fe8021-e5d9-428a-aae9-94c1b43906ec",
+  "versionId": "6df7f628-de70-4e4b-833a-df7429a40a15",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "9303a4f42b081e045dba0b8758beea9a612f0d29c4bfcc885a093891ebc720d1"

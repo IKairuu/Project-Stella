@@ -15,7 +15,6 @@ export class CompanionGateway {
   @UseGuards(AuthGuard)
   async handleAnalyzer(@ConnectedSocket() client: Socket, @MessageBody() payload: any){
     const auth = client.handshake.headers.authorization
-    console.log(payload)
     const response = await this.companionService.handleMessage(payload, auth!)
     client.emit('analyze', response) 
   }

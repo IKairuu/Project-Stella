@@ -14,6 +14,7 @@ import { CompanionGateway } from './companion/companion.gateway.js';
 import { CompanionService } from './companion/companion.service.js';
 import { Service } from './companion/service/service.js';
 import { MessageModule } from './message/message.module.js';
+import { AuthService } from './auth/auth.service.js';
 
 @Module({
   imports: [HttpModule.register({ timeout: 5000, maxRedirects: 5 }), 
@@ -25,6 +26,6 @@ import { MessageModule } from './message/message.module.js';
     ]), TaskModule, EventModule, SessionModule, MessageModule
   ],
   controllers: [AppController],
-  providers: [AppService, { provide: APP_GUARD, useClass: ThrottlerGuard }, CompanionGateway, CompanionService, Service],
+  providers: [AppService, { provide: APP_GUARD, useClass: ThrottlerGuard }, CompanionGateway, CompanionService, Service, AuthService],
 })
 export class AppModule {}
